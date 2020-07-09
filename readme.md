@@ -7,7 +7,7 @@ SPRING MVC VS. SPRING WEBFLUX
    - under folder mvc: `docker build -t vioao/mvc .`
    - under folder web: `docker build -t vioao/web .`
 
-2. run the service with limited cou and memory
+2. run the service with limited cpu and memory
    - run service web: `docker run --cpus=0.2 --memory=1g -p 8080:8080 -p 8081:8081 -e JAVA_OPTS="-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=8081 -Dcom.sun.management.jmxremote.rmi.port=8081" vioao/web`
    - get the IPAddress of service web： `docker inspect ${service web's ContainerId}`
    - run service flux： `docker run --cpus=0.2 --memory=1g -p 8090:8090 -p 8091:8091 -e JAVA_OPTS=-Durl="http://${IPAddress}:8080 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=8091 -Dcom.sun.management.jmxremote.rmi.port=8091" vioao/flux`
