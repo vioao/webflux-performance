@@ -14,3 +14,7 @@ SPRING MVC VS. SPRING WEBFLUX
    - run service mvc： `docker run --cpus=0.2 --memory=1g -p 9090:9090 -p 9091:9091 -e JAVA_OPTS="-Durl=http://${IPAddress}:8080 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=9091 -Dcom.sun.management.jmxremote.rmi.port=9091" vioao/mvc`
    
 3. begin performance test with jmeter, just import the configuration file under folder jmeter and configure the thread group by yourself.
+
+4. you can configure your jmx to monitor the resources usage
+
+Under the static folder, there is a stress test result(with 1000 threads, 10 ramp-up period, 50 execute times) to test the issue that there is remote network call with 10ms delay.
