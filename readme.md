@@ -18,3 +18,14 @@ SPRING MVC VS. SPRING WEBFLUX
 4. you can configure your jmx to monitor the resources usage
 
 Under the static folder, there is a stress test result(with 1000 threads, 10 ramp-up period, 50 execute times) to test the issue that there is remote network call with 10ms delay.
+
+- performance
+  
+  ![env](static/mvc-vs-flux-1000threads.png)
+
+- resource usage
+  - mvc
+    ![env](static/mvc-monitor.png)
+
+  - flux
+    ![env](static/flux-monitor.png)
