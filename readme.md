@@ -9,7 +9,7 @@ SPRING MVC VS. SPRING WEBFLUX
 
 2. run the service with limited cpu and memory
    > docker-compose --compatibility up
-                                                    >
+   
 3. begin performance test with jmeter, just import the configuration file under folder jmeter and configure the thread group by yourself.
 
 4. you can configure your jmx to monitor the resources usage
