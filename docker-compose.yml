@@ -1,0 +1,46 @@
+version: '3'
+services:
+  web:
+    restart: always
+    image: vioao/web
+    container_name: web
+    deploy:
+      resources:
+        limits:
+          cpus: '0.20'
+          memory: 512M
+    ports:
+      - 8080:8080
+      - 8081:8081
+    environment:
+      JAVA_OPTS: "-Xms512m -Xmx512m -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=8081 -Dcom.sun.management.jmxremote.rmi.port=8081"
+
+  flux:
+    restart: always
+    image: vioao/flux
+    container_name: flux
+    deploy:
+      resources:
+        limits:
+          cpus: '0.20'
+          memory: 512M
+    ports:
+      - 8090:8090
+      - 8091:8091
+    environment:
+      JAVA_OPTS: "-Xms512m -Xmx512m -Durl=http://web:8080 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=8091 -Dcom.sun.management.jmxremote.rmi.port=8091"
+
+  mvc:
+    restart: always
+    image: vioao/mvc
+    container_name: mvc
+    deploy:
+      resources:
+        limits:
+          cpus: '0.20'
+          memory: 512M
+    ports:
+      - 9090:9090
+      - 9091:9091
+    environment:
+      JAVA_OPTS: "-Xms512m -Xmx512m -Durl=http://web:8080 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=9091 -Dcom.sun.management.jmxremote.rmi.port=9091"
