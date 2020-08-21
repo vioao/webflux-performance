@@ -8,13 +8,21 @@ SPRING MVC VS. SPRING WEBFLUX
    - under folder web: `docker build -t vioao/web .`
 
 2. run the service with limited cpu and memory
-   - run service web: `docker run --init --cpus=0.2 --memory=1g -p 8080:8080 -p 8081:8081 -e JAVA_OPTS="-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=8081 -Dcom.sun.management.jmxremote.rmi.port=8081" vioao/web`
-   - get the IPAddress of service web： `docker inspect ${service web's ContainerId}`
-   - run service flux： `docker run --init --cpus=0.2 --memory=1g -p 8090:8090 -p 8091:8091 -e JAVA_OPTS=-Durl="http://${IPAddress}:8080 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=8091 -Dcom.sun.management.jmxremote.rmi.port=8091" vioao/flux`
-   - run service mvc： `docker run --init --cpus=0.2 --memory=1g -p 9090:9090 -p 9091:9091 -e JAVA_OPTS="-Durl=http://${IPAddress}:8080 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.port=9091 -Dcom.sun.management.jmxremote.rmi.port=9091" vioao/mvc`
-   
+   > docker-compose --compatibility up
+                                                    >
 3. begin performance test with jmeter, just import the configuration file under folder jmeter and configure the thread group by yourself.
 
 4. you can configure your jmx to monitor the resources usage
 
 Under the static folder, there is a stress test result(with 1000 threads, 10 ramp-up period, 50 execute times) to test the issue that there is remote network call with 10ms delay.
+
+- performance
+  
+  ![env](static/mvc-vs-flux-1000threads.png)
+
+- resource usage
+  - mvc
+    ![env](static/mvc-monitor.png)
+
+  - flux
+    ![env](static/flux-monitor.png)
